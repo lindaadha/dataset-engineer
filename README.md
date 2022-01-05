@@ -1,6 +1,6 @@
 # DATASET ENGINEER
 
-This repository can be used to data preparation such as: video to frame, Labeling Image  Please update requirement if you have change any method for this Dataset Engineer folder.
+This repository can be used to data preparation such as: video to frame, Labeling Image  Please update requirement if you have change any method for this Dataset Engineer folder. Thank You :)
 
 ## Features
 - Labeling Image with LabelImg or CVAT
@@ -9,6 +9,8 @@ This repository can be used to data preparation such as: video to frame, Labelin
 -- Train Test Split Data
 -- Edit classes Labeling TXT (Change, Swap, Delete)
 -- Counter object classes
+-- Random Erasing
+-- Augmentor 
 - Training and Testing (YoloV4 and YoloR)
 
 ### Labeling Image 
@@ -17,7 +19,7 @@ Labeling Image digunakan untuk Anotasi Image, bisa menggunakan dua tools berikut
 - [CVAT]() for online Annotation
 
 ### Preparation Data for Training
-#### _Video to Frame_
+#### _A. Video to Frame_
 digunakan untuk mengubah video menjadi frame, untuk langkah-langkahnya dapat diikuti sebagai berikut: 
 1. Ubah directory _videoPath_ sesuai dengan path directory yang akan diubah 
 ```sh
@@ -47,7 +49,7 @@ cv2.imwrite( pathOut + "%03d.png" % name, image) #extension frame
 ```
 7. Program dapat dijalankan.
 
-#### _Train Test Split Data_
+#### _B. Train Test Split Data_
 Fitur ini digunakan untuk membagi data Train dan Test sebelum masuk proses ke dalam proses Training. Sebelum menjalankan program ini pastikan untuk Gambar dan TXT/XML (labeling result) dijadikan dalam satu folder.
 Berikut adalah cara untuk menjalankan program ini:
 1. Ubah lokasi directory path folder sesuai dengan lokasi folder yang akan di training
@@ -77,17 +79,56 @@ file_train.write("Directory Path/all_images" + "/" + title + '.jpeg' + "\n")
 ```
 6. Program dapat dijalankan 
 
-#### _Edit Classes for TXT File_
-== SKIP == 
-programnya ada yang mau diedit
+#### _C. Edit Classes for TXT File_
+terdapat beberapa fitur yang bisa digunakan dalam program ini untuk mengedit nilai class atau pun array dalam format YOLO Txt. 
+1. Change Class = Mengganti nilai kelas 
+```sh
+python all-edit-txt.py -i "Directory Input Path" -c -o "Nilai Kelas Lama" -n "Nilai Kelas Baru"
+```
+2. Swap Class = Menukar nilai kelas
+```sh
+python all-edit-txt.py -i "Directory Input Path" -s -o "Nilai Kelas yang akan ditukar" -n "Dengan Nilai yang baru akan ditukar"
+```
+4. Delete Class = Menghapus nilai kelas
+```sh
+python all-edit-txt.py -i "Directory Input Path" -d -dc "Nilai Kelas yang akan dihapus" 
+```
+5. Add Class = Menambah nilai kelas 
+```sh
+python all-edit-txt.py -i "Directory Input Path" -a -ac "Jumlah nilai yang akan ditambahkan"
+```
+__*Note__: Yang dimaksud Nilai adalah nilai array kelas yang terdapat diurutan classes
 
-#### _Counter Object Classes_
+
+#### _D. Counter Object Classes_
 Program ini digunakan untuk menghitung jumlah objek class yang akan di Training, gunanya untuk memudahkan dalam pemrataan jumlah setiap Class Objek yang digunakan 
 Berikut command line yang digunakan 
 ```sh
 python counter.py -i "Directory_Path" -c 0*
 ```
 __*Note__: Untuk Classes (-c) disesuaikan dengan objek class yang akan dihitung
+
+#### _E. Random Erasing_
+Program ini digunakan untuk memberikan objek hitam di image untuk menambahkan augmentasi data 
+**tambahin fotonya**
+yang perlu diubah dalam program ini adalah:
+- mengubah directory path inputnya 
+```sh
+path = 'divide/'
+```
+- mengubah directory path outputnya 
+```sh
+output_path = 'output/'
+```
+__*Note__: dalam program ini masih perlu membuat folder outputnya secara manual 
+
+#### _E. Augmentor_
+untuk menambahkan jumlah variasi data gambar dapat menggunakan "Widya Image Augmentor" yang dapat ditemukan di GitLab Perusahaan, atau
+Menggunakan program Augmentor Offline yang terdapat beberapa fitur 
+- Flip
+- Blur
+- Salt and Pepper
+
 
 ### Training dan Testing YOLO 
 ___Setup and Instalation___
@@ -102,3 +143,5 @@ ___How to Train and Test___
 - YoloV4 
 -- For Training using YoloV4, you can following this [steps](https://github.com/AlexeyAB/darknet#how-to-train-to-detect-your-custom-objects).
 -- 
+
+
