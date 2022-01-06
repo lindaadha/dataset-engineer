@@ -122,12 +122,16 @@ output_path = 'output/'
 ```
 __*Note__: dalam program ini masih perlu membuat folder outputnya secara manual 
 
-#### _E. Augmentor_
+#### _F. Augmentor_
 untuk menambahkan jumlah variasi data gambar dapat menggunakan "Widya Image Augmentor" yang dapat ditemukan di GitLab Perusahaan, atau
 Menggunakan program Augmentor Offline yang terdapat beberapa fitur 
 - Flip
 - Blur
 - Salt and Pepper
+
+Yang perlu diperhatikan dalam menggunakan program ini perlu diganti adalah 
+INPUT_PATH dan OUTPUT_PATH 
+untuk menggunakan fitur yang ingin digunakan hanya perlu menjalankan cells yang akan digunakan 
 
 
 ### Training dan Testing YOLO 
